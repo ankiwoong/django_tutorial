@@ -1,4 +1,7 @@
+import datetime
 from django.db import models
+# from django.utils import timezone : Django의 시간대 관련 유틸리티
+from django.utils import timezone
 
 # 각 변수는 모델의 데이터베이스 필드
 
@@ -9,6 +12,13 @@ class Question(models.Model):
     question_text = models.CharField(max_length=200)
     # DateTimeField : 날짜와 시간(datetime)
     pub_date = models.DateTimeField('date published')
+
+    # 호출할 때마다 호출 / Django 가 자동으로 생성하는 관리 사이트 에서도 객체의 표현이 사용
+    def __str__(self):
+        return self.question_text
+
+    def was_published_recently(self):
+        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
 
 
 # Choice : 선택의 텍스트와 투표 집계 / 각 선택은 질문과 관련
@@ -22,3 +32,7 @@ class Choice(models.Model):
     choice_text = models.CharField(max_length=200)
     # IntegerField : 32 비트 정수형 필드 / default(선택적 인수)
     votes = models.IntegerField(default=0)
+
+    # 호출할 때마다 호출 / Django 가 자동으로 생성하는 관리 사이트 에서도 객체의 표현이 사용
+    def __str__(self):
+        return self.choice_text
