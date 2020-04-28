@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',          # 세션 프레임워크
     'django.contrib.messages',          # 메세징 프레임워크
     'django.contrib.staticfiles',       # 정적 파일을 관리하는 프레임워크
+    'polls.apps.PollsConfig',           # polls\apps > class PollsConfig
 ]
 
 MIDDLEWARE = [
