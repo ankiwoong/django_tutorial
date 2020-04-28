@@ -1,8 +1,7 @@
-from django.http import HttpResponse
-from django.template import loader
-from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
-from .models import Question
+from django.urls import reverse
+from .models import Choice, Question
 
 
 # URLconf : 뷰를 호출하려면 이와 연결된 URL 이 있어야 하는데 이를 사용하기 위해 사용
@@ -34,10 +33,26 @@ def detail(request, question_id):
     return render(request, 'polls/detail.html', {'question': question})
 
 
+
 def results(request, question_id):
-    response = "You're looking at the results of question %s."
-    return HttpResponse(response % question_id)
+    question = get_object_or_404(Question, pk=question_id)
+    return render(request, 'polls/results.html', {'question': question})
 
 
 def vote(request, question_id):
-    return HttpResponse("You're voting on question %s." % question_id)
+    question = get_object_or_404(Question, pk=question_id)
+    try:
+        selected_choice = question.choice_set.get(pk=request.POST['choice'])
+    except (KeyError, Choice.DoesNotExist):
+        # 질문 투표 양식을 다시 표시하십시오.
+        return render(request, 'polls/detail.html', {
+            'question': question,
+            'error_message': "You didn't select a choice.",
+        })
+    else:
+        selected_choice.votes += 1
+        selected_choice.save()
+        # 성공적으로 처리 한 후에는 항상 HttpResponseRedirect를 반환하십시오.
+        # POST 데이터로. 이렇게하면 데이터가 두 번 게시되는 것을 방지 할 수 있습니다.
+        # 사용자가 뒤로 버튼을 누르십시오.
+        return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))

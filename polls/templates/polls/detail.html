@@ -1,10 +1,29 @@
 <!-- 먼저 question 객체에 대해 사전형으로 탐색 -->
 <!-- 속성 탐색에도 실패한다면 리스트의 인덱스 탐색을 시도 -->
 <h1>{{ question.question_text }}</h1>
-<ul>
-  <!-- 메소드 호출 -->
-  <!-- question.choice_set.all = question.choice_set.all() -->
-  {% for choice in question.choice_set.all %}
-  <li>{{ choice.choice_text }}</li>
+
+{% if error_message %}
+<p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<!-- 양식을 제출하면 데이터가 서버 측에서 변경되므로 method = "get"(method = "get"과 반대)을 사용는 것이 매우 중요 -->
+<!-- 데이터 서버 측을 변경하는 양식을 작성할 때마다 method = "post"를 사용 -->
+<form action="{% url 'polls:vote' question.id %}" method="post">
+  <!-- {% csrf_token %} : 교차 사이트 요청 위조 방지 -->
+  {% csrf_token %} {% for choice in question.choice_set.all %}
+  <!-- 각 질문 선택 항목에 대한 라디오 버튼을 표시 -->
+  <!-- value는 연관된 질문 선택 항목의 ID -->
+  <!-- 누군가가 라디오 버튼 중 하나를 선택하여 폼을 제출하면,
+    POST 데이터 인 choice=#을 보낼 것입니다. 여기서 #은 선택한 항목의 ID입니다. -->
+  <input
+    type="radio"
+    name="choice"
+    id="choice{{ forloop.counter }}"
+    value="{{ choice.id }}"
+  />
+  <!-- forloop.counter 는 for 태그가 반복을 한 횟수 -->
+  <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label
+  ><br />
   {% endfor %}
-</ul>
+  <input type="submit" value="Vote" />
+</form>

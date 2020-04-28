@@ -13,7 +13,7 @@ class Question(models.Model):
     # DateTimeField : 날짜와 시간(datetime)
     pub_date = models.DateTimeField('date published')
     # [Vscode] E1101:Class has no ‘objects’ member repair
-    objects = models.Manager()
+    # objects = models.Manager()
 
     # 호출할 때마다 호출 / Django 가 자동으로 생성하는 관리 사이트 에서도 객체의 표현이 사용
     def __str__(self):
@@ -34,6 +34,8 @@ class Choice(models.Model):
     choice_text = models.CharField(max_length=200)
     # IntegerField : 32 비트 정수형 필드 / default(선택적 인수)
     votes = models.IntegerField(default=0)
+    # [Vscode] E1101:Class has no ‘objects’ member repair
+    # objects = models.Manager()
 
     # 호출할 때마다 호출 / Django 가 자동으로 생성하는 관리 사이트 에서도 객체의 표현이 사용
     def __str__(self):
