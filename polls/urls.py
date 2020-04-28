@@ -9,8 +9,8 @@ urlpatterns = [
     # name : 템플릿을 포함한 Django 어디에서나 명확하게 참조
     # ex: /polls/
     path('', views.index, name='index'),
-    # ex: /polls/5/
-    path('<int:question_id>/', views.detail, name='detail'),
+    # added the word 'specifics'
+    path('specifics/<int:question_id>/', views.detail, name='detail'),
     # ex: /polls/5/results/
     path('<int:question_id>/results/', views.results, name='results'),
     # ex: /polls/5/vote/
