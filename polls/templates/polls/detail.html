@@ -1,1 +1,10 @@
-{{ question }}
+<!-- 먼저 question 객체에 대해 사전형으로 탐색 -->
+<!-- 속성 탐색에도 실패한다면 리스트의 인덱스 탐색을 시도 -->
+<h1>{{ question.question_text }}</h1>
+<ul>
+  <!-- 메소드 호출 -->
+  <!-- question.choice_set.all = question.choice_set.all() -->
+  {% for choice in question.choice_set.all %}
+  <li>{{ choice.choice_text }}</li>
+  {% endfor %}
+</ul>
