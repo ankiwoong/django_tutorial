@@ -1,7 +1,7 @@
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
-from django.urls import reverse
 from .models import Choice, Question
+from django.urls import reverse
+from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponse, HttpResponseRedirect
 
 
 # URLconf : 뷰를 호출하려면 이와 연결된 URL 이 있어야 하는데 이를 사용하기 위해 사용
@@ -31,7 +31,6 @@ def detail(request, question_id):
     # 만약 객체가 존재하지 않을 경우, Http404 예외가 발생합니다.
     question = get_object_or_404(Question, pk=question_id)
     return render(request, 'polls/detail.html', {'question': question})
-
 
 
 def results(request, question_id):
