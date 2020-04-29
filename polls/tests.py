@@ -1,10 +1,8 @@
 import datetime
+from django.urls import reverse
 from django.test import TestCase
 from django.utils import timezone
 from .models import Question
-from django.urls import reverse
-
-# pub_date를 가진 Question` 인스턴스를 생성하는 메소드를 가진 django.test.TestCase 하위 클래스를 생성
 
 
 def create_question(question_text, days):

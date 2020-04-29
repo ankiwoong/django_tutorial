@@ -20,24 +20,24 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '=ane2wb7bu$agi($506_84v31+7fooyveavj2s+xtvq=4@w#&1'
+SECRET_KEY = 'hg(33(x0_@bw6hajcaof@*1jbt=4-7lyex14=leu_$m^cxbmq6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.56.101', 'localhost', '127.0.0.1']        # 접속 주소 설정
+ALLOWED_HOSTS = []
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',             # 관리용 사이트
-    'django.contrib.auth',              # 인증 시스템
-    'django.contrib.contenttypes',      # 컨텐츠 타입을 위한 프레임워크
-    'django.contrib.sessions',          # 세션 프레임워크
-    'django.contrib.messages',          # 메세징 프레임워크
-    'django.contrib.staticfiles',       # 정적 파일을 관리하는 프레임워크
-    'polls.apps.PollsConfig',           # polls\apps > class PollsConfig
+    'polls.apps.PollsConfig',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +55,6 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # DIRS : Django 템플릿을 로드 할 때 검사 할 파일 시스템 디렉토리 목록입니다. 바로 검색 경로입니다.
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -105,9 +104,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'ko-kr'         # django admin 한국어
+LANGUAGE_CODE = 'ko-kr'
 
-TIME_ZONE = 'Asia/Seoul'        # 한국 시간
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
